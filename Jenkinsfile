@@ -11,22 +11,22 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building Docker image...'
-                sh 'sudo docker build -t myapp .'
+                sh 'docker build -t myapp .'
             }
         }
 
         stage('Test') {
             steps {
                 echo 'Checking Docker containers...'
-                sh 'sudo docker ps'
+                sh 'docker ps'
             }
         }
 
         stage('Deploy') {
             steps {
                 echo 'Deploying application container...'
-                sh 'sudo docker rm -f myapp-container || true'
-                sh 'sudo docker run -d -p 8081:80 --name myapp-container myapp'
+                sh 'docker rm -f myapp-container || true'
+                sh 'docker run -d -p 8081:80 --name myapp-container myapp'
             }
         }
     }
